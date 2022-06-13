@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/postgres</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">admin</property>
+        <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">true</property>
+        <!-- Drop and re-create the database schema on startup -->
+        <property name="hbm2ddl.auto">create-drop</property>
+        <mapping class="com.ivanvelev.models.User"/>
+        <mapping class="com.ivanvelev.models.Review"/>
+        <mapping class="com.ivanvelev.models.Order"/>
+        <mapping class="com.ivanvelev.models.Country"/>
+        <mapping class="com.ivanvelev.models.Address"/>
+        <mapping class="com.ivanvelev.models.Item"/>
+    </session-factory>
+</hibernate-configuration>
