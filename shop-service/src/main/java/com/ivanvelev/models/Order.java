@@ -9,10 +9,10 @@ import java.util.List;
 @Entity(name = "orders")
 public class Order {
     @Id
-    @SequenceGenerator(name="orderstable_id_seq",
-            sequenceName="orderstable_id_seq",
-            allocationSize=1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "orderstable_id_seq")
+    @SequenceGenerator(name = "orderstable_id_seq",
+            sequenceName = "orderstable_id_seq",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "orderstable_id_seq")
     @Column(updatable = false, unique = true, nullable = false)
     private Long id;
     @OneToOne(fetch = FetchType.LAZY)

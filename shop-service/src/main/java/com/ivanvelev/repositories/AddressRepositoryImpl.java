@@ -1,16 +1,16 @@
 package com.ivanvelev.repositories;
 
 import com.ivanvelev.models.Address;
-import com.ivanvelev.models.Country;
-import com.ivanvelev.util.SessionUtil;
+import com.ivanvelev.utils.SessionUtil;
 import jakarta.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
-public class AddressRepositoryImpl implements AddressRepository{
+@Repository
+public class AddressRepositoryImpl implements AddressRepository {
 
     @Override
     public List<Address> getAllAddresses() {
@@ -34,8 +34,7 @@ public class AddressRepositoryImpl implements AddressRepository{
     public void createAddress(Address address) {
         try (Session session = SessionUtil.getSession()) {
             Transaction transaction = session.beginTransaction();
-            session.update(address.getCountry());
-            session.persist(address);
+            session.saveOrUpdate(address);
             transaction.commit();
         }
     }

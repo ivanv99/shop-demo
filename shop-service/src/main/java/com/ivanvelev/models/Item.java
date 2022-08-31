@@ -5,13 +5,13 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "item")
+@Entity(name = "items")
 public class Item {
     @Id
-    @SequenceGenerator(name="itemtable_id_seq",
-            sequenceName="itemtable_id_seq",
-            allocationSize=1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "itemtable_id_seq")
+    @SequenceGenerator(name = "itemtable_id_seq",
+            sequenceName = "itemtable_id_seq",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "itemtable_id_seq")
     @Column(updatable = false, unique = true, nullable = false)
     private Long id;
     @Column

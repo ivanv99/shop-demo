@@ -1,10 +1,9 @@
 package com.ivanvelev.repositories;
 
 import com.ivanvelev.models.Item;
-import com.ivanvelev.models.User;
-import com.ivanvelev.util.Util;
-import org.junit.Assert;
-import org.junit.Test;
+import com.ivanvelev.utils.HibernateTestsUtil;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class ItemRepositoryTests {
 
@@ -12,11 +11,11 @@ public class ItemRepositoryTests {
 
     @Test
     public void test() {
-        Item one = Util.item("bike",1);
-        Item two = Util.item("book",2);
-        Item three = Util.item("apple",3);
-        Item four = Util.item("phone",4);
-        Item five = Util.item("laptop",5);
+        Item one = HibernateTestsUtil.item("bike", 1);
+        Item two = HibernateTestsUtil.item("book", 2);
+        Item three = HibernateTestsUtil.item("apple", 3);
+        Item four = HibernateTestsUtil.item("phone", 4);
+        Item five = HibernateTestsUtil.item("laptop", 5);
 
         itemRepository.createItem(one);
         itemRepository.createItem(two);
@@ -24,7 +23,7 @@ public class ItemRepositoryTests {
         itemRepository.createItem(four);
         itemRepository.createItem(five);
 
-        Assert.assertEquals(5, itemRepository.getAllItems().size());
+        Assertions.assertEquals(5, itemRepository.getAllItems().size());
 
         Item itemToChange = itemRepository.getItemById(itemRepository.getAllItems().get(0).getId().intValue());
         itemToChange.setName("motorbike");
@@ -34,7 +33,7 @@ public class ItemRepositoryTests {
 
         Item changedItem = itemRepository.getItemById(itemRepository.getAllItems().get(itemRepository.getAllItems().size() - 1).getId().intValue());
 
-        Assert.assertEquals("motorbike", changedItem.getName());
+        Assertions.assertEquals("motorbike", changedItem.getName());
 
         itemRepository.deleteItem(one);
         itemRepository.deleteItem(two);
@@ -42,6 +41,6 @@ public class ItemRepositoryTests {
         itemRepository.deleteItem(four);
         itemRepository.deleteItem(five);
 
-        Assert.assertEquals(0, itemRepository.getAllItems().size());
+        Assertions.assertEquals(0, itemRepository.getAllItems().size());
     }
 }

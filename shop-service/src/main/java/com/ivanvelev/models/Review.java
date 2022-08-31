@@ -4,13 +4,13 @@ import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 
-@Entity(name = "review")
+@Entity(name = "reviews")
 public class Review {
     @Id
-    @SequenceGenerator(name="reviewtable_id_seq",
-            sequenceName="reviewtable_id_seq",
-            allocationSize=1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "reviewtable_id_seq")
+    @SequenceGenerator(name = "reviewtable_id_seq",
+            sequenceName = "reviewtable_id_seq",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reviewtable_id_seq")
     @Column(updatable = false, unique = true, nullable = false)
     private Long id;
     @Column

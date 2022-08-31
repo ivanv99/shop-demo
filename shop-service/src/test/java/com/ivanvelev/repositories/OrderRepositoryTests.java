@@ -4,12 +4,9 @@ import com.ivanvelev.models.Address;
 import com.ivanvelev.models.Item;
 import com.ivanvelev.models.Order;
 import com.ivanvelev.models.User;
-import com.ivanvelev.util.Util;
-import org.checkerframework.checker.units.qual.A;
-import org.junit.Assert;
-import org.junit.Test;
-
-import java.util.ArrayList;
+import com.ivanvelev.utils.HibernateTestsUtil;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class OrderRepositoryTests {
 
@@ -21,11 +18,11 @@ public class OrderRepositoryTests {
 
     @Test
     public void test() {
-        Address oneAddress = Util.address(countryRepository.getCountryById(1), "Sofia, Mladost");
-        Address twoAddress = Util.address(countryRepository.getCountryById(2), "New York, Str");
-        Address threeAddress = Util.address(countryRepository.getCountryById(3), "Moscow, Str");
-        Address fourAddress = Util.address(countryRepository.getCountryById(4), "London, Str");
-        Address fiveAddress = Util.address(countryRepository.getCountryById(5), "Berlin, Str");
+        Address oneAddress = HibernateTestsUtil.address(countryRepository.getCountryById(1), "Sofia, Mladost");
+        Address twoAddress = HibernateTestsUtil.address(countryRepository.getCountryById(2), "New York, Str");
+        Address threeAddress = HibernateTestsUtil.address(countryRepository.getCountryById(3), "Moscow, Str");
+        Address fourAddress = HibernateTestsUtil.address(countryRepository.getCountryById(4), "London, Str");
+        Address fiveAddress = HibernateTestsUtil.address(countryRepository.getCountryById(5), "Berlin, Str");
 
         addressRepository.createAddress(oneAddress);
         addressRepository.createAddress(twoAddress);
@@ -33,11 +30,11 @@ public class OrderRepositoryTests {
         addressRepository.createAddress(fourAddress);
         addressRepository.createAddress(fiveAddress);
 
-        User oneUser = Util.user("Ivan", "Velev", "i.velev99@gmail.com", "ivanv99", "asdfghjkl");
-        User twoUser = Util.user("Georgi", "Ivanov", "g.ivanov@gmail.com", "givanov", "asdfghjkl");
-        User threeUser = Util.user("Daniel", "Nikolov", "d.nikolov@gmail.com", "dnikolov", "asdfghjkl");
-        User fourUser = Util.user("Ivan", "Ivanov", "i.ivanov@gmail.com", "iivanov", "asdfghjkl");
-        User fiveUser = Util.user("Aleksandar", "Stoyanov", "a.stoqnov@gmail.com", "astoyanov", "asdfghjkl");
+        User oneUser = HibernateTestsUtil.user("Ivan", "Velev", "i.velev99@gmail.com", "ivanv99", "asdfghjkl");
+        User twoUser = HibernateTestsUtil.user("Georgi", "Ivanov", "g.ivanov@gmail.com", "givanov", "asdfghjkl");
+        User threeUser = HibernateTestsUtil.user("Daniel", "Nikolov", "d.nikolov@gmail.com", "dnikolov", "asdfghjkl");
+        User fourUser = HibernateTestsUtil.user("Ivan", "Ivanov", "i.ivanov@gmail.com", "iivanov", "asdfghjkl");
+        User fiveUser = HibernateTestsUtil.user("Aleksandar", "Stoyanov", "a.stoqnov@gmail.com", "astoyanov", "asdfghjkl");
 
         userRepository.createUser(oneUser);
         userRepository.createUser(twoUser);
@@ -45,11 +42,11 @@ public class OrderRepositoryTests {
         userRepository.createUser(fourUser);
         userRepository.createUser(fiveUser);
 
-        Item oneItem = Util.item("bike",1);
-        Item twoItem = Util.item("book",2);
-        Item threeItem = Util.item("apple",3);
-        Item fourItem = Util.item("phone",4);
-        Item fiveItem = Util.item("laptop",5);
+        Item oneItem = HibernateTestsUtil.item("bike", 1);
+        Item twoItem = HibernateTestsUtil.item("book", 2);
+        Item threeItem = HibernateTestsUtil.item("apple", 3);
+        Item fourItem = HibernateTestsUtil.item("phone", 4);
+        Item fiveItem = HibernateTestsUtil.item("laptop", 5);
 
         itemRepository.createItem(oneItem);
         itemRepository.createItem(twoItem);
@@ -57,19 +54,19 @@ public class OrderRepositoryTests {
         itemRepository.createItem(fourItem);
         itemRepository.createItem(fiveItem);
 
-        Order orderOne = Util.order(userRepository.getUserById(userRepository.getAllUsers().get(0).getId().intValue()),
+        Order orderOne = HibernateTestsUtil.order(userRepository.getUserById(userRepository.getAllUsers().get(0).getId().intValue()),
                 addressRepository.getAddressById(addressRepository.getAllAddresses().get(0).getId().intValue()),
-                Util.itemList(itemRepository.getItemById(itemRepository.getAllItems().get(0).getId().intValue()),
+                HibernateTestsUtil.itemList(itemRepository.getItemById(itemRepository.getAllItems().get(0).getId().intValue()),
                         itemRepository.getItemById(itemRepository.getAllItems().get(2).getId().intValue())));
 
-        Order orderTwo =  Util.order(userRepository.getUserById(userRepository.getAllUsers().get(1).getId().intValue()),
+        Order orderTwo = HibernateTestsUtil.order(userRepository.getUserById(userRepository.getAllUsers().get(1).getId().intValue()),
                 addressRepository.getAddressById(addressRepository.getAllAddresses().get(1).getId().intValue()),
-                Util.itemList(itemRepository.getItemById(itemRepository.getAllItems().get(1).getId().intValue()),
+                HibernateTestsUtil.itemList(itemRepository.getItemById(itemRepository.getAllItems().get(1).getId().intValue()),
                         itemRepository.getItemById(itemRepository.getAllItems().get(3).getId().intValue())));
 
-        Order orderThree =  Util.order(userRepository.getUserById(userRepository.getAllUsers().get(2).getId().intValue()),
+        Order orderThree = HibernateTestsUtil.order(userRepository.getUserById(userRepository.getAllUsers().get(2).getId().intValue()),
                 addressRepository.getAddressById(addressRepository.getAllAddresses().get(2).getId().intValue()),
-                Util.itemList(itemRepository.getItemById(itemRepository.getAllItems().get(4).getId().intValue()),
+                HibernateTestsUtil.itemList(itemRepository.getItemById(itemRepository.getAllItems().get(4).getId().intValue()),
                         itemRepository.getItemById(itemRepository.getAllItems().get(4).getId().intValue()),
                         itemRepository.getItemById(itemRepository.getAllItems().get(4).getId().intValue())));
 
@@ -77,24 +74,24 @@ public class OrderRepositoryTests {
         orderRepository.createOrder(orderTwo);
         orderRepository.createOrder(orderThree);
 
-        Assert.assertEquals(3, orderRepository.getAllOrders().size());
+        Assertions.assertEquals(3, orderRepository.getAllOrders().size());
 
         Order orderToChange = orderRepository.getOrderById(orderRepository.getAllOrders().get(2).getId().intValue());
 
-        orderToChange.setOrderItems(Util.itemList(itemRepository.getItemById(itemRepository.getAllItems().get(4).getId().intValue()),
+        orderToChange.setOrderItems(HibernateTestsUtil.itemList(itemRepository.getItemById(itemRepository.getAllItems().get(4).getId().intValue()),
                 itemRepository.getItemById(itemRepository.getAllItems().get(3).getId().intValue()),
                 itemRepository.getItemById(itemRepository.getAllItems().get(2).getId().intValue()),
                 itemRepository.getItemById(itemRepository.getAllItems().get(1).getId().intValue())));
 
         orderRepository.updateOrder(orderToChange);
 
-        Assert.assertEquals(4, orderRepository.getOrderById(orderRepository.getAllOrders().get(2).getId().intValue()).getOrderItems().size());
+        Assertions.assertEquals(4, orderRepository.getOrderById(orderRepository.getAllOrders().get(2).getId().intValue()).getOrderItems().size());
 
         orderRepository.deleteOrder(orderOne);
         orderRepository.deleteOrder(orderTwo);
         orderRepository.deleteOrder(orderThree);
 
-        Assert.assertEquals(0, orderRepository.getAllOrders().size());
+        Assertions.assertEquals(0, orderRepository.getAllOrders().size());
 
         addressRepository.deleteAddress(oneAddress);
         addressRepository.deleteAddress(twoAddress);

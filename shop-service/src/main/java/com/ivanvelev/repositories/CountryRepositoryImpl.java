@@ -1,13 +1,13 @@
 package com.ivanvelev.repositories;
 
 import com.ivanvelev.models.Country;
-import com.ivanvelev.util.SessionUtil;
-import jakarta.persistence.EntityNotFoundException;
+import com.ivanvelev.utils.SessionUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public class CountryRepositoryImpl implements CountryRepository {
 
     @Override

@@ -1,14 +1,16 @@
 package com.ivanvelev.repositories;
 
 import com.ivanvelev.models.Order;
-import com.ivanvelev.util.SessionUtil;
+import com.ivanvelev.utils.SessionUtil;
+import jakarta.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
-public class OrderRepositoryImpl implements OrderRepository{
+@Repository
+public class OrderRepositoryImpl implements OrderRepository {
 
 
     @Override
@@ -29,6 +31,7 @@ public class OrderRepositoryImpl implements OrderRepository{
     }
 
     @Override
+    @Transactional
     public void createOrder(Order order) {
         try (Session session = SessionUtil.getSession()) {
             Transaction transaction = session.beginTransaction();
@@ -38,6 +41,7 @@ public class OrderRepositoryImpl implements OrderRepository{
     }
 
     @Override
+    @Transactional
     public void updateOrder(Order order) {
         try (Session session = SessionUtil.getSession()) {
             Transaction transaction = session.beginTransaction();
@@ -47,6 +51,7 @@ public class OrderRepositoryImpl implements OrderRepository{
     }
 
     @Override
+    @Transactional
     public void deleteOrder(Order order) {
         try (Session session = SessionUtil.getSession()) {
             Transaction transaction = session.beginTransaction();

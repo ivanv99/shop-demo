@@ -1,10 +1,7 @@
 package com.ivanvelev.repositories;
 
-import com.ivanvelev.models.Country;
-import org.junit.Assert;
-import org.junit.Test;
-
-import java.util.Optional;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class CountryRepositoryTests {
 
@@ -12,13 +9,13 @@ public class CountryRepositoryTests {
 
     @Test
     public void testGetAllCountriesReturnNotEmpty() {
-        Assert.assertEquals(5,repository.getAllCountries().size());
+        Assertions.assertEquals(5, repository.getAllCountries().size());
     }
 
     @Test
     public void testGetCountryByIdReturnSame() {
-        Assert.assertEquals(1, repository.getCountryById(1).getId().intValue());
-        Assert.assertEquals("Bulgaria", repository.getCountryById(1).getCountry());
+        Assertions.assertEquals(1, repository.getCountryById(1).getId().intValue());
+        Assertions.assertEquals("Bulgaria", repository.getCountryById(1).getCountry());
     }
 
 }

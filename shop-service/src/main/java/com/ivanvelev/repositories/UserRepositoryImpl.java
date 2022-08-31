@@ -1,13 +1,16 @@
 package com.ivanvelev.repositories;
 
 import com.ivanvelev.models.User;
-import com.ivanvelev.util.SessionUtil;
+import com.ivanvelev.utils.SessionUtil;
+import jakarta.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class UserRepositoryImpl implements UserRepository {
 
     @Override
@@ -28,15 +31,18 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    @Transactional
     public void createUser(User user) {
         try (Session session = SessionUtil.getSession()) {
             Transaction transaction = session.beginTransaction();
+            session.persist(user.getUserCredentials());
             session.persist(user);
             transaction.commit();
         }
     }
 
     @Override
+    @Transactional
     public void updateUser(User user) {
         try (Session session = SessionUtil.getSession()) {
             Transaction transaction = session.beginTransaction();
@@ -46,6 +52,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    @Transactional
     public void deleteUser(User user) {
         try (Session session = SessionUtil.getSession()) {
             Transaction transaction = session.beginTransaction();

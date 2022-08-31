@@ -4,13 +4,13 @@ import jakarta.persistence.*;
 
 import java.util.Objects;
 
-@Entity(name = "country")
+@Entity(name = "countries")
 public class Country {
     @Id
-    @SequenceGenerator(name="countrytable_id_seq",
-            sequenceName="countrytable_id_seq",
-            allocationSize=1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "countrytable_id_seq")
+    @SequenceGenerator(name = "countrytable_id_seq",
+            sequenceName = "countrytable_id_seq",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "countrytable_id_seq")
     @Column(updatable = false, unique = true, nullable = false)
     private Long id;
     @Column

@@ -1,14 +1,16 @@
 package com.ivanvelev.repositories;
 
 import com.ivanvelev.models.Review;
-import com.ivanvelev.util.SessionUtil;
+import com.ivanvelev.utils.SessionUtil;
+import jakarta.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
-public class ReviewRepositoryImpl implements ReviewRepository{
+@Repository
+public class ReviewRepositoryImpl implements ReviewRepository {
 
     @Override
     public List<Review> getAllReviews() {
@@ -28,6 +30,7 @@ public class ReviewRepositoryImpl implements ReviewRepository{
     }
 
     @Override
+    @Transactional
     public void createReview(Review review) {
         try (Session session = SessionUtil.getSession()) {
             Transaction transaction = session.beginTransaction();
@@ -37,6 +40,7 @@ public class ReviewRepositoryImpl implements ReviewRepository{
     }
 
     @Override
+    @Transactional
     public void updateReview(Review review) {
         try (Session session = SessionUtil.getSession()) {
             Transaction transaction = session.beginTransaction();
@@ -46,6 +50,7 @@ public class ReviewRepositoryImpl implements ReviewRepository{
     }
 
     @Override
+    @Transactional
     public void deleteReview(Review review) {
         try (Session session = SessionUtil.getSession()) {
             Transaction transaction = session.beginTransaction();

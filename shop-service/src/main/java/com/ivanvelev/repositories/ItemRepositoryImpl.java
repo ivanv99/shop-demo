@@ -1,15 +1,16 @@
 package com.ivanvelev.repositories;
 
-import com.ivanvelev.models.Country;
 import com.ivanvelev.models.Item;
-import com.ivanvelev.util.SessionUtil;
+import com.ivanvelev.utils.SessionUtil;
+import jakarta.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
-public class ItemRepositoryImpl implements ItemRepository{
+@Repository
+public class ItemRepositoryImpl implements ItemRepository {
     @Override
     public List<Item> getAllItems() {
         try (Session session = SessionUtil.getSession()) {
@@ -28,6 +29,7 @@ public class ItemRepositoryImpl implements ItemRepository{
     }
 
     @Override
+    @Transactional
     public void createItem(Item item) {
         try (Session session = SessionUtil.getSession()) {
             Transaction transaction = session.beginTransaction();
@@ -37,6 +39,7 @@ public class ItemRepositoryImpl implements ItemRepository{
     }
 
     @Override
+    @Transactional
     public void updateItem(Item item) {
         try (Session session = SessionUtil.getSession()) {
             Transaction transaction = session.beginTransaction();
@@ -46,6 +49,7 @@ public class ItemRepositoryImpl implements ItemRepository{
     }
 
     @Override
+    @Transactional
     public void deleteItem(Item item) {
         try (Session session = SessionUtil.getSession()) {
             Transaction transaction = session.beginTransaction();

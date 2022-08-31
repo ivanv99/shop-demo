@@ -5,22 +5,21 @@ import jakarta.persistence.*;
 @Entity(name = "users")
 public class User {
     @Id
-    @SequenceGenerator(name="userstable_id_seq",
-            sequenceName="userstable_id_seq",
-            allocationSize=1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "userstable_id_seq")
+    @SequenceGenerator(name = "userstable_id_seq",
+            sequenceName = "userstable_id_seq",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userstable_id_seq")
     @Column(updatable = false, unique = true, nullable = false)
     private Long id;
     @Column(name = "first_name")
     private String firstName;
+
     @Column(name = "last_name")
     private String lastName;
-    @Column
-    private String email;
-    @Column
-    private String username;
-    @Column
-    private String password;
+
+    @OneToOne
+    @JoinColumn(name = "credentials_id", referencedColumnName = "username")
+    private UserCredentials userCredentials;
 
     public User() {
     }
@@ -49,28 +48,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
+    public UserCredentials getUserCredentials() {
+        return userCredentials;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserCredentials(UserCredentials userCredentials) {
+        this.userCredentials = userCredentials;
     }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
 }
