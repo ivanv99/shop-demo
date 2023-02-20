@@ -1,12 +1,12 @@
 package com.ivanvelev.models;
 
-import jakarta.persistence.*;
-
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "orders")
+@Entity(name = "order")
+@Table(name = "order", schema = "shop")
 public class Order {
     @Id
     @SequenceGenerator(name = "orderstable_id_seq",
@@ -28,7 +28,6 @@ public class Order {
             inverseJoinColumns = @JoinColumn(name = "item_id"))
     private List<Item> orderItems;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date_and_time")
     private Timestamp timestamp;
 

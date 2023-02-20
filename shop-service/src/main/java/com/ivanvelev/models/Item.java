@@ -1,11 +1,12 @@
 package com.ivanvelev.models;
 
-import jakarta.persistence.*;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "items")
+@Entity(name = "item")
+@Table(name = "item", schema = "shop")
 public class Item {
     @Id
     @SequenceGenerator(name = "itemtable_id_seq",

@@ -2,7 +2,7 @@ package com.ivanvelev.repositories;
 
 import com.ivanvelev.models.Order;
 import com.ivanvelev.utils.SessionUtil;
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -16,7 +16,7 @@ public class OrderRepositoryImpl implements OrderRepository {
     @Override
     public List<Order> getAllOrders() {
         try (Session session = SessionUtil.getSession()) {
-            Query<Order> query = session.createQuery("from orders ", Order.class);
+            Query<Order> query = session.createQuery("from order ", Order.class);
             return query.getResultList();
         }
     }
@@ -24,7 +24,7 @@ public class OrderRepositoryImpl implements OrderRepository {
     @Override
     public Order getOrderById(int id) {
         try (Session session = SessionUtil.getSession()) {
-            Query<Order> query = session.createQuery("from orders o where o.id=:id", Order.class);
+            Query<Order> query = session.createQuery("from order o where o.id=:id", Order.class);
             query.setParameter("id", id);
             return query.getSingleResult();
         }

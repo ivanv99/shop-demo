@@ -2,7 +2,7 @@ package com.ivanvelev.repositories;
 
 import com.ivanvelev.models.Review;
 import com.ivanvelev.utils.SessionUtil;
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;

@@ -1,8 +1,9 @@
 package com.ivanvelev.models;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
-@Entity(name = "users")
+@Entity(name = "user")
+@Table(name = "user", schema = "shop")
 public class User {
     @Id
     @SequenceGenerator(name = "userstable_id_seq",

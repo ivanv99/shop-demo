@@ -1,12 +1,11 @@
 package com.ivanvelev.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import javax.persistence.*;
 import org.jetbrains.annotations.NotNull;
 
 @Entity(name = "user_credentials")
+@Table(name = "user_credentials", schema = "shop")
 public class UserCredentials {
 
     @Id

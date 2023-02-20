@@ -1,10 +1,11 @@
 package com.ivanvelev.models;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.sql.Timestamp;
 
-@Entity(name = "reviews")
+@Entity(name = "review")
+@Table(name = "review", schema = "shop")
 public class Review {
     @Id
     @SequenceGenerator(name = "reviewtable_id_seq",
@@ -22,7 +23,7 @@ public class Review {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Temporal(TemporalType.TIMESTAMP)
+//    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date_and_time")
     private Timestamp timestamp;
 

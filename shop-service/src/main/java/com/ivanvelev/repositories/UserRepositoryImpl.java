@@ -2,12 +2,12 @@ package com.ivanvelev.repositories;
 
 import com.ivanvelev.models.User;
 import com.ivanvelev.utils.SessionUtil;
-import jakarta.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -16,7 +16,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public List<User> getAllUsers() {
         try (Session session = SessionUtil.getSession()) {
-            Query<User> query = session.createQuery("from users ", User.class);
+            Query<User> query = session.createQuery("from user ", User.class);
             return query.getResultList();
         }
     }
@@ -24,7 +24,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User getUserById(int id) {
         try (Session session = SessionUtil.getSession()) {
-            Query<User> query = session.createQuery("from users u where u.id=:id", User.class);
+            Query<User> query = session.createQuery("from user u where u.id=:id", User.class);
             query.setParameter("id", id);
             return query.getSingleResult();
         }

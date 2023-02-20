@@ -2,12 +2,12 @@ package com.ivanvelev.repositories;
 
 import com.ivanvelev.models.Address;
 import com.ivanvelev.utils.SessionUtil;
-import jakarta.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 @Repository
 public class AddressRepositoryImpl implements AddressRepository {

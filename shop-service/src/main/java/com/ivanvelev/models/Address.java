@@ -1,8 +1,9 @@
 package com.ivanvelev.models;
 
-import jakarta.persistence.*;
 
-@Entity(name = "addresses")
+import javax.persistence.*;
+@Entity(name = "address")
+@Table(name = "address", schema = "shop")
 public class Address {
     @Id
     @SequenceGenerator(name = "addresstable_id_seq",

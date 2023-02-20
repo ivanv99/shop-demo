@@ -1,10 +1,10 @@
 package com.ivanvelev.models;
 
-import jakarta.persistence.*;
-
+import javax.persistence.*;
 import java.util.Objects;
 
-@Entity(name = "countries")
+@Entity(name = "country")
+@Table(name = "country", schema = "shop")
 public class Country {
     @Id
     @SequenceGenerator(name = "countrytable_id_seq",
