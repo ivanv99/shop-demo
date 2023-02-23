@@ -1,28 +1,50 @@
 package com.ivanvelev.controllers.utils;
 
-import com.ivanvelev.models.User;
-import com.ivanvelev.models.UserCredentials;
-import com.ivanvelev.models.dto.UserCredentialsDto;
-import com.ivanvelev.models.dto.UserDto;
+import com.ivanvelev.models.Customer;
+import com.ivanvelev.models.Review;
+import com.ivanvelev.models.dto.CustomerDto;
+import com.ivanvelev.models.dto.ReviewDto;
+import com.ivanvelev.repositories.ItemRepository;
+import com.ivanvelev.repositories.ReviewRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ModelMapper {
 
-    public User convertToUserFromDto(UserDto userDto) {
-        User user = new User();
-        user.setFirstName(userDto.getFirstName());
-        user.setLastName(userDto.getLastName());
-        user.setUserCredentials(convertToUserCredentialsFromDto(userDto.getUserCredentialsDto()));
-        return user;
+    private final ReviewRepository reviewRepository;
+    private final ItemRepository itemRepository;
+
+    @Autowired
+    public ModelMapper(ReviewRepository reviewRepository, ItemRepository itemRepository) {
+        this.reviewRepository = reviewRepository;
+        this.itemRepository = itemRepository;
     }
 
-    public UserCredentials convertToUserCredentialsFromDto(UserCredentialsDto userCredentialsDto) {
-        UserCredentials userCredentials = new UserCredentials();
-        userCredentials.setUsername(userCredentialsDto.getUsername());
-        userCredentials.setPassword(userCredentialsDto.getPassword());
-        userCredentials.setEmail(userCredentialsDto.getEmail());
-        return userCredentials;
+    public Customer convertToCustomerFromDto(CustomerDto customerDto) {
+        Customer customer = new Customer();
+        customer.setFirstName(customerDto.getFirstName());
+        customer.setLastName(customerDto.getLastName());
+        customer.setEmail(customerDto.getEmail());
+        return customer;
+    }
+
+    public Review fromDto(ReviewDto reviewDto) {
+        Review review = new Review();
+        dtoToObject(review, reviewDto);
+        return review;
+    }
+
+    public Review fromDto(ReviewDto reviewDto, int id) {
+        Review review = reviewRepository.getReviewById(id);
+        dtoToObject(review, reviewDto);
+        return review;
+    }
+
+    private void dtoToObject(Review review, ReviewDto reviewDto) {
+        review.setName(reviewDto.getName());
+        review.setReview(reviewDto.getReview());
+        review.setItem(itemRepository.getItemById(reviewDto.getItemId()));
     }
 
 }

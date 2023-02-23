@@ -1,1 +1,8 @@
+com\ivanvelev\repositories\ItemRepositoryTests.class
+com\ivanvelev\repositories\AddressRepositoryTests.class
+com\ivanvelev\repositories\CountryRepositoryTests.class
+com\ivanvelev\repositories\UserRepositoryTests.class
+com\ivanvelev\repositories\ReviewRepositoryTests.class
+com\ivanvelev\utils\HibernateTestsUtil.class
 com\ivanvelev\AppTest.class
+com\ivanvelev\repositories\OrderRepositoryTests.class

@@ -19,13 +19,9 @@ public class Review {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
 
-//    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "date_and_time")
-    private Timestamp timestamp;
+    @Column
+    private String name;
 
     public Review() {
     }
@@ -54,19 +50,11 @@ public class Review {
         this.item = item;
     }
 
-    public User getUser() {
-        return user;
+    public String getName() {
+        return name;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
+    public void setName(String name) {
+        this.name = name;
     }
 }

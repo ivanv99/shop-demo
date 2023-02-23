@@ -1,14 +1,20 @@
 package com.ivanvelev.models.dto;
 
-public class UserDto {
+public class CustomerDto {
 
     private String firstName;
 
     private String lastName;
 
-    private UserCredentialsDto userCredentialsDto;
+    private String email;
 
-    public UserDto() {
+    public CustomerDto(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
+    public CustomerDto() {
     }
 
     public String getFirstName() {
@@ -27,11 +33,11 @@ public class UserDto {
         this.lastName = lastName;
     }
 
-    public UserCredentialsDto getUserCredentialsDto() {
-        return userCredentialsDto;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserCredentialsDto(UserCredentialsDto userCredentialsDto) {
-        this.userCredentialsDto = userCredentialsDto;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

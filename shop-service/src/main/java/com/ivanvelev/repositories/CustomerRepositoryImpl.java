@@ -1,6 +1,6 @@
 package com.ivanvelev.repositories;
 
-import com.ivanvelev.models.User;
+import com.ivanvelev.models.Customer;
 import com.ivanvelev.utils.SessionUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -11,20 +11,19 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-public class UserRepositoryImpl implements UserRepository {
-
+public class CustomerRepositoryImpl implements CustomerRepository{
     @Override
-    public List<User> getAllUsers() {
+    public List<Customer> getAllCustomers() {
         try (Session session = SessionUtil.getSession()) {
-            Query<User> query = session.createQuery("from user ", User.class);
+            Query<Customer> query = session.createQuery("from customer ", Customer.class);
             return query.getResultList();
         }
     }
 
     @Override
-    public User getUserById(int id) {
+    public Customer getCustomerById(int id) {
         try (Session session = SessionUtil.getSession()) {
-            Query<User> query = session.createQuery("from user u where u.id=:id", User.class);
+            Query<Customer> query = session.createQuery("from customer c where c.id= :id ", Customer.class);
             query.setParameter("id", id);
             return query.getSingleResult();
         }
@@ -32,31 +31,30 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     @Transactional
-    public void createUser(User user) {
+    public void createCustomer(Customer customer) {
         try (Session session = SessionUtil.getSession()) {
             Transaction transaction = session.beginTransaction();
-            session.persist(user.getUserCredentials());
-            session.persist(user);
+            session.persist(customer);
             transaction.commit();
         }
     }
 
     @Override
     @Transactional
-    public void updateUser(User user) {
+    public void updateCustomer(Customer customer) {
         try (Session session = SessionUtil.getSession()) {
             Transaction transaction = session.beginTransaction();
-            session.merge(user);
+            session.merge(customer);
             transaction.commit();
         }
     }
 
     @Override
     @Transactional
-    public void deleteUser(User user) {
+    public void deleteCustomer(Customer customer) {
         try (Session session = SessionUtil.getSession()) {
             Transaction transaction = session.beginTransaction();
-            session.remove(user);
+            session.remove(customer);
             transaction.commit();
         }
     }

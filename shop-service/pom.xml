@@ -11,7 +11,7 @@
         </dependency>
     </dependencies>
     <parent>
-        <artifactId>shop-demo</artifactId>
+        <artifactId>shop-demo-template</artifactId>
         <groupId>com.ivanvelev</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>

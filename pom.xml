@@ -10,10 +10,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.ivanvelev</groupId>
-    <artifactId>shop-demo</artifactId>
+    <artifactId>shop-demo-template</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>shop-demo</name>
+    <name>shop-demo-template</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
