@@ -9,7 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>shop-service</artifactId>
+    <artifactId>shop-repository</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>com.shoptemplate</groupId>
-            <artifactId>shop-repository</artifactId>
+            <artifactId>shop-domain</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
