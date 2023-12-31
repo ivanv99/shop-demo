@@ -1,10 +1,5 @@
 package com.ivanvelev.repositories;
 
-import com.ivanvelev.models.Address;
-import com.ivanvelev.utils.HibernateTestsUtil;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 public class AddressRepositoryTests {
 
 //    private final CountryRepository countryRepository = new CountryRepositoryImpl();

@@ -1,8 +1,5 @@
 package com.ivanvelev.repositories;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 public class CountryRepositoryTests {
 
 //    private final CountryRepository repository = new CountryRepositoryImpl();

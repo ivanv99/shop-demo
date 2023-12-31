@@ -1,9 +1,9 @@
 package com.shoptemplate.controller.utils;
 
-import com.shoptemplate.model.Customer;
+import com.shoptemplate.model.User;
 import com.shoptemplate.model.Item;
 import com.shoptemplate.model.Review;
-import com.shoptemplate.model.dto.CustomerDto;
+import com.shoptemplate.model.dto.UserDto;
 import com.shoptemplate.model.dto.ReviewDto;
 import com.shoptemplate.repositories.ItemRepository;
 import com.shoptemplate.repositories.ReviewRepository;
@@ -24,12 +24,12 @@ public class ModelMapper {
         this.itemRepository = itemRepository;
     }
 
-    public Customer convertToCustomerFromDto(CustomerDto customerDto) {
-        Customer customer = new Customer();
-        customer.setFirstName(customerDto.getFirstName());
-        customer.setLastName(customerDto.getLastName());
-        customer.setEmail(customerDto.getEmail());
-        return customer;
+    public User convertToUserFromDto(UserDto userDto) {
+        User user = new User();
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
+        user.setEmail(userDto.getEmail());
+        return user;
     }
 
     public Review fromDto(ReviewDto reviewDto) {

@@ -1,10 +1,5 @@
 package com.ivanvelev.repositories;
 
-import com.ivanvelev.models.Item;
-import com.ivanvelev.utils.HibernateTestsUtil;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 public class ItemRepositoryTests {
 
 //    private final ItemRepository itemRepository = new ItemRepositoryImpl();

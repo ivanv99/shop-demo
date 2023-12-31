@@ -1,11 +1,5 @@
 package com.ivanvelev.utils;
 
-import com.ivanvelev.models.*;
-
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-
 public class HibernateTestsUtil {
 //
 //    public static Address address(Country country, String addressDetails) {

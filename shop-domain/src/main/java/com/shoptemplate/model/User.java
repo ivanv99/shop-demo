@@ -7,15 +7,16 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "address", schema = "shop")
-public class Address {
+@Table(name = "user", schema = "shop")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(updatable = false, unique = true, nullable = false)
     private Long id;
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "country_id")
-    private Country country;
-    @Column(name = "address_details")
-    private String addressDetails;
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "last_name")
+    private String lastName;
+    @Column(name = "email")
+    private String email;
 }
