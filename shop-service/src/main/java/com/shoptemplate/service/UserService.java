@@ -11,9 +11,9 @@ public interface UserService {
 
     Optional<User> getUserById(int id);
 
-    void createUser(User customer);
+    void createUser(User user);
 
-    void updateUser(User customer);
+    void updateUser(User user);
 
-    void deleteUser(User customer);
+    void deleteUser(User user);
 }

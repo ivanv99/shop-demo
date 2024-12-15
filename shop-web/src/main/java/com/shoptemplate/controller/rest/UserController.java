@@ -4,47 +4,55 @@ import com.shoptemplate.controller.utils.ModelMapper;
 import com.shoptemplate.model.User;
 import com.shoptemplate.model.dto.UserDto;
 import com.shoptemplate.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/customers")
+@RequestMapping("/api/users")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private ModelMapper modelMapper;
+    private final UserService userService;
+    private final ModelMapper modelMapper;
+
+    public UserController(UserService userService, ModelMapper modelMapper) {
+        this.userService = userService;
+        this.modelMapper = modelMapper;
+    }
 
     @GetMapping
-    public List<User> getAllUsers(){
-        return userService.getAllUsers();
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        List<UserDto> users = userService.getAllUsers()
+                .stream()
+                .map(modelMapper::convertToDto)
+                .toList();
+        return ResponseEntity.ok(users);
     }
 
     @GetMapping("/{id}")
-    public User getById(@PathVariable int id) {
-        if (userService.getUserById(id).isPresent()) {
-            return userService.getUserById(id).get();
-        }
-        return null;
+    public ResponseEntity<UserDto> getUserById(@PathVariable int id) {
+        return userService.getUserById(id)
+                .map(user -> ResponseEntity.ok(modelMapper.convertToDto(user)))
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
     }
 
     @PostMapping
-    public User create(@RequestBody UserDto userDto) {
-        User user = modelMapper.convertToUserFromDto(userDto);
+    public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto) {
+        User user = modelMapper.convertFromDto(userDto);
         userService.createUser(user);
-        return user;
+        return ResponseEntity.status(HttpStatus.CREATED).body(modelMapper.convertToDto(user));
     }
 
     @DeleteMapping("/{id}")
-    public User delete(@PathVariable int id) {
-        if (userService.getUserById(id).isPresent()) {
-            User user = userService.getUserById(id).get();
-            userService.deleteUser(user);
-            return user;
-        }
-        return null;
+    public ResponseEntity<UserDto> deleteUser(@PathVariable int id) {
+        return userService.getUserById(id)
+                .map(user -> {
+                    userService.deleteUser(user);
+                    return ResponseEntity.ok(modelMapper.convertToDto(user));
+                })
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
     }
 }

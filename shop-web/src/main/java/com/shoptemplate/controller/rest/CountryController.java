@@ -1,12 +1,12 @@
 package com.shoptemplate.controller.rest;
 
+import com.shoptemplate.controller.utils.ModelMapper;
 import com.shoptemplate.model.Country;
+import com.shoptemplate.model.dto.CountryDto;
 import com.shoptemplate.service.CountryService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,20 +14,55 @@ import java.util.List;
 @RequestMapping("/api/countries")
 public class CountryController {
 
-    @Autowired
-    private CountryService countryService;
+    private final CountryService countryService;
+    private final ModelMapper modelMapper;
+
+    public CountryController(CountryService countryService, ModelMapper modelMapper) {
+        this.countryService = countryService;
+        this.modelMapper = modelMapper;
+    }
 
     @GetMapping
-    public List<Country> getAllCountries(){
-        return countryService.getAllCountries();
+    public ResponseEntity<List<CountryDto>> getAllCountries() {
+        List<CountryDto> countries = countryService.getAllCountries()
+                .stream()
+                .map(modelMapper::convertToDto)
+                .toList();
+        return ResponseEntity.ok(countries);
     }
 
     @GetMapping("/{id}")
-    public Country getById(@PathVariable int id) {
-        if (countryService.getCountryById(id).isPresent()) {
-            return countryService.getCountryById(id).get();
-        }
-        return null;
+    public ResponseEntity<CountryDto> getCountryById(@PathVariable int id) {
+        return countryService.getCountryById(id)
+                .map(country -> ResponseEntity.ok(modelMapper.convertToDto(country)))
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
     }
 
+    @PostMapping
+    public ResponseEntity<CountryDto> createCountry(@RequestBody CountryDto countryDto) {
+        Country country = modelMapper.convertFromDto(countryDto);
+        countryService.createCountry(country);
+        return ResponseEntity.status(HttpStatus.CREATED).body(modelMapper.convertToDto(country));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CountryDto> updateCountry(@PathVariable int id, @RequestBody CountryDto countryDto) {
+        return countryService.getCountryById(id)
+                .map(existingCountry -> {
+                    existingCountry = modelMapper.convertFromDto(countryDto);
+                    countryService.updateCountry(existingCountry);
+                    return ResponseEntity.ok(modelMapper.convertToDto(existingCountry));
+                })
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<CountryDto> deleteCountry(@PathVariable int id) {
+        return countryService.getCountryById(id)
+                .map(country -> {
+                    countryService.deleteCountry(country);
+                    return ResponseEntity.ok(modelMapper.convertToDto(country));
+                })
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
+    }
 }
