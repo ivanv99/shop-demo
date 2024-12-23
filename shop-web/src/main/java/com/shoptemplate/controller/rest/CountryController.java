@@ -32,7 +32,7 @@ public class CountryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CountryDto> getCountryById(@PathVariable int id) {
+    public ResponseEntity<CountryDto> getCountryById(@PathVariable Long id) {
         return countryService.getCountryById(id)
                 .map(country -> ResponseEntity.ok(modelMapper.convertToDto(country)))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
@@ -46,7 +46,7 @@ public class CountryController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CountryDto> updateCountry(@PathVariable int id, @RequestBody CountryDto countryDto) {
+    public ResponseEntity<CountryDto> updateCountry(@PathVariable Long id, @RequestBody CountryDto countryDto) {
         return countryService.getCountryById(id)
                 .map(existingCountry -> {
                     existingCountry = modelMapper.convertFromDto(countryDto);
@@ -57,7 +57,7 @@ public class CountryController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<CountryDto> deleteCountry(@PathVariable int id) {
+    public ResponseEntity<CountryDto> deleteCountry(@PathVariable Long id) {
         return countryService.getCountryById(id)
                 .map(country -> {
                     countryService.deleteCountry(country);

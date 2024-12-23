@@ -16,6 +16,16 @@ public class Address {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "country_id")
     private Country country;
-    @Column(name = "address_details")
-    private String addressDetails;
+
+    @Column(name = "street", nullable = false, length = 100)
+    private String street;
+
+    @Column(name = "city", nullable = false, length = 50)
+    private String city;
+
+    @Column(name = "state", nullable = false, length = 50)
+    private String state;
+
+    @Column(name = "zip_code", nullable = false, length = 10)
+    private String zipCode;
 }

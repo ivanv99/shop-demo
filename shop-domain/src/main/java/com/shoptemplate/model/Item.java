@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,6 +19,8 @@ public class Item {
     private String name;
     @Column
     private double price;
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "orderItems")
-    private List<Order> itemOrders;
+
+//    if "Find all orders containing this item" is required then this can be uncommented
+//    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "orderItems")
+//    private List<Order> itemOrders;
 }

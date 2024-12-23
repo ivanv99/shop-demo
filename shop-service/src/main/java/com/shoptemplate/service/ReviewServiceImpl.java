@@ -22,18 +22,18 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public Optional<Review> getReviewById(int id) {
-        return reviewRepository.findById((long) id);
+    public Optional<Review> getReviewById(Long id) {
+        return reviewRepository.findById(id);
     }
 
     @Override
     public void createReview(Review review) {
-        reviewRepository.save(review);
+        reviewRepository.saveAndFlush(review);
     }
 
     @Override
     public void updateReview(Review review) {
-        reviewRepository.save(review);
+        reviewRepository.saveAndFlush(review);
     }
 
     @Override

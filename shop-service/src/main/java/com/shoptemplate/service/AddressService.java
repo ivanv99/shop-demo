@@ -9,7 +9,7 @@ public interface AddressService {
 
     List<Address> getAllAddresses();
 
-    Optional<Address> getAddressById(int id);
+    Optional<Address> getAddressById(Long id);
 
     void createAddress(Address address);
 

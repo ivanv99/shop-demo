@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CountryDto {
+    private int id;
+
     @NotBlank(message = "Country is required.")
     private String country;
 }

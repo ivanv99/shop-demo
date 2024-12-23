@@ -21,18 +21,18 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Optional<Order> getOrderById(int id) {
-        return orderRepository.findById((long) id);
+    public Optional<Order> getOrderById(Long id) {
+        return orderRepository.findById(id);
     }
 
     @Override
     public void createOrder(Order order) {
-        orderRepository.save(order);
+        orderRepository.saveAndFlush(order);
     }
 
     @Override
     public void updateOrder(Order order) {
-        orderRepository.save(order);
+        orderRepository.saveAndFlush(order);
     }
 
     @Override

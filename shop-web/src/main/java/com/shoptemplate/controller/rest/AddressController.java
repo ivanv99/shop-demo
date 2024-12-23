@@ -32,9 +32,9 @@ public class AddressController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AddressDto> getAddressById(@PathVariable int id) {
+    public ResponseEntity<AddressDto> getAddressById(@PathVariable Long id) {
         return addressService.getAddressById(id)
-                .map(Address -> ResponseEntity.ok(modelMapper.convertToDto(Address)))
+                .map(address -> ResponseEntity.ok(modelMapper.convertToDto(address)))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
     }
 
@@ -46,10 +46,10 @@ public class AddressController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AddressDto> updateAddress(@PathVariable int id, @RequestBody AddressDto AddressDto) {
+    public ResponseEntity<AddressDto> updateAddress(@PathVariable Long id, @RequestBody AddressDto addressDto) {
         return addressService.getAddressById(id)
                 .map(existingAddress -> {
-                    existingAddress = modelMapper.convertFromDto(AddressDto);
+                    existingAddress = modelMapper.convertFromDto(addressDto);
                     addressService.updateAddress(existingAddress);
                     return ResponseEntity.ok(modelMapper.convertToDto(existingAddress));
                 })
@@ -57,7 +57,7 @@ public class AddressController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<AddressDto> deleteAddress(@PathVariable int id) {
+    public ResponseEntity<AddressDto> deleteAddress(@PathVariable Long id) {
         return addressService.getAddressById(id)
                 .map(address -> {
                     addressService.deleteAddress(address);

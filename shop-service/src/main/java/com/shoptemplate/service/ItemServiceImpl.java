@@ -22,18 +22,18 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Optional<Item> getItemById(int id) {
-        return itemRepository.findById((long) id);
+    public Optional<Item> getItemById(Long id) {
+        return itemRepository.findById(id);
     }
 
     @Override
     public void createItem(Item item) {
-        itemRepository.save(item);
+        itemRepository.saveAndFlush(item);
     }
 
     @Override
     public void updateItem(Item item) {
-        itemRepository.save(item);
+        itemRepository.saveAndFlush(item);
     }
 
     @Override

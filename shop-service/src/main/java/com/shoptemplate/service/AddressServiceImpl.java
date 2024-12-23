@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AddressServiceImpl implements AddressService{
+public class AddressServiceImpl implements AddressService {
 
     private final AddressRepository addressRepository;
 
@@ -22,18 +22,18 @@ public class AddressServiceImpl implements AddressService{
     }
 
     @Override
-    public Optional<Address> getAddressById(int id) {
-        return addressRepository.findById((long) id);
+    public Optional<Address> getAddressById(Long id) {
+        return addressRepository.findById(id);
     }
 
     @Override
     public void createAddress(Address address) {
-        addressRepository.save(address);
+        addressRepository.saveAndFlush(address);
     }
 
     @Override
     public void updateAddress(Address address) {
-        addressRepository.save(address);
+        addressRepository.saveAndFlush(address);
     }
 
     @Override

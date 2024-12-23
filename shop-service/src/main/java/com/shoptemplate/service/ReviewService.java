@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface ReviewService {
     List<Review> getAllReviews();
 
-    Optional<Review> getReviewById(int id);
+    Optional<Review> getReviewById(Long id);
 
     void createReview(Review review);
 

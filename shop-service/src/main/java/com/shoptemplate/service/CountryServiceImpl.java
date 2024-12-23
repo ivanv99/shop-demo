@@ -22,18 +22,18 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Override
-    public Optional<Country> getCountryById(int id) {
-        return countryRepository.findById((long) id);
+    public Optional<Country> getCountryById(Long id) {
+        return countryRepository.findById(id);
     }
 
     @Override
     public void createCountry(Country country) {
-        countryRepository.save(country);
+        countryRepository.saveAndFlush(country);
     }
 
     @Override
     public void updateCountry(Country country) {
-        countryRepository.save(country);
+        countryRepository.saveAndFlush(country);
     }
 
     @Override

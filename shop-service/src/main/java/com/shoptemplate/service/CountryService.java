@@ -9,7 +9,7 @@ public interface CountryService {
 
     List<Country> getAllCountries();
 
-    Optional<Country> getCountryById(int id);
+    Optional<Country> getCountryById(Long id);
 
     void createCountry(Country country);
 
