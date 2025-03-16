@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,6 +21,11 @@ public class Item {
     private String name;
     @Column
     private double price;
+
+    @Lob
+    @ElementCollection
+    @Column(columnDefinition = "LONGBLOB")
+    private List<byte[]> images;  // Store multiple images as binary data
 
 //    if "Find all orders containing this item" is required then this can be uncommented
 //    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "orderItems")
