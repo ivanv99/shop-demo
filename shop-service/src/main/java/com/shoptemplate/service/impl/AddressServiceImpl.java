@@ -1,7 +1,8 @@
-package com.shoptemplate.service;
+package com.shoptemplate.service.impl;
 
 import com.shoptemplate.model.Address;
 import com.shoptemplate.repositories.AddressRepository;
+import com.shoptemplate.service.AddressService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,7 +1,8 @@
-package com.shoptemplate.service;
+package com.shoptemplate.service.impl;
 
 import com.shoptemplate.model.Item;
 import com.shoptemplate.repositories.ItemRepository;
+import com.shoptemplate.service.ItemService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

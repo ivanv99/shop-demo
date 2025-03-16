@@ -24,15 +24,12 @@ public class Order {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id")
     private Address address;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(
-//            name = "orders_items",
-//            joinColumns = @JoinColumn(name = "order_id"),
-//            inverseJoinColumns = @JoinColumn(name = "item_id"))
-//    private List<Item> orderItems;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "orders_items",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "item_id"))
+    private List<Item> orderItems;
     @Column(name = "date_and_time")
     private LocalDateTime timestamp;
 }

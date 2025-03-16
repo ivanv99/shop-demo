@@ -1,7 +1,8 @@
-package com.shoptemplate.service;
+package com.shoptemplate.service.impl;
 
 import com.shoptemplate.model.Order;
 import com.shoptemplate.repositories.OrderRepository;
+import com.shoptemplate.service.OrderService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

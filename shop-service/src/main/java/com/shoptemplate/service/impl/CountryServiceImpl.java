@@ -1,7 +1,8 @@
-package com.shoptemplate.service;
+package com.shoptemplate.service.impl;
 
 import com.shoptemplate.model.Country;
 import com.shoptemplate.repositories.CountryRepository;
+import com.shoptemplate.service.CountryService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
