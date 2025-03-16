@@ -1,6 +1,7 @@
 package com.shoptemplate.controller.rest;
 
 import com.shoptemplate.controller.utils.ModelMapper;
+import com.shoptemplate.model.Image;
 import com.shoptemplate.model.Item;
 import com.shoptemplate.model.dto.ItemDto;
 import com.shoptemplate.service.ItemService;
@@ -44,7 +45,7 @@ public class ItemController {
     @PostMapping
     public ResponseEntity<ItemDto> createItem(@RequestBody ItemDto itemDto, @RequestParam(value = "images") MultipartFile[] images) throws IOException {
         Item item = modelMapper.convertFromDto(itemDto);
-        item.setImages(convertImagesToBytes(images));
+        item.setImages(convertImagesToEntities(images));
         itemService.createItem(item);
         return ResponseEntity.status(HttpStatus.CREATED).body(modelMapper.convertToDto(item));
     }
@@ -62,6 +63,11 @@ public class ItemController {
         return itemService.getItemById(id)
                 .map(existingItem -> {
                     existingItem = modelMapper.convertFromDto(itemDto);
+                    try {
+                        existingItem.setImages(convertImagesToEntities(images));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                     itemService.updateItem(existingItem);
                     return ResponseEntity.ok(modelMapper.convertToDto(existingItem));
                 })
@@ -76,5 +82,16 @@ public class ItemController {
                     return ResponseEntity.ok(modelMapper.convertToDto(item));
                 })
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
+    }
+
+    private List<Image> convertImagesToEntities(MultipartFile[] images) throws IOException {
+        List<Image> imageList = new ArrayList<>();
+        for (MultipartFile image : images) {
+            Image imageEntity = new Image();
+            imageEntity.setImageData(image.getBytes());
+            imageEntity.setImageName(image.getName());
+            imageList.add(imageEntity);
+        }
+        return imageList;
     }
 }

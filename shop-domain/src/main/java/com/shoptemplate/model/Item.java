@@ -22,10 +22,8 @@ public class Item {
     @Column
     private double price;
 
-    @Lob
-    @ElementCollection
-    @Column(columnDefinition = "LONGBLOB")
-    private List<byte[]> images;  // Store multiple images as binary data
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Image> images;  // List of images for the item
 
 //    if "Find all orders containing this item" is required then this can be uncommented
 //    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "orderItems")
